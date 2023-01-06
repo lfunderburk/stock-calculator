@@ -55,17 +55,23 @@ if __name__=="__main__":
     query_string_nyse = {"function":"TIME_SERIES_DAILY","symbol":"NYSE:CCL","datatype":"json","output_size":"compact"}
 
     # # Perform query
-    # resp_nyse = api_data_extraction(xrapid_url, headers_alphavantage, "./data/nyse_ccl.json",query_string_nyse)
-    # resp_le = api_data_extraction(xrapid_url, headers_alphavantage, "./data/le_ccl.json",query_string_le)
+    resp_nyse = api_data_extraction(xrapid_url, headers_alphavantage, "./data/nyse_ccl.json",query_string_nyse)
+    resp_le = api_data_extraction(xrapid_url, headers_alphavantage, "./data/le_ccl.json",query_string_le)
 
-    # # Reformat into dataframe object
-    # nyse_ccl_df = pd.DataFrame.from_dict(resp_nyse['Time Series (Daily)']).T
-    # le_ccl_df = pd.DataFrame.from_dict(resp_le['Time Series (Daily)']).T
+    # Reformat into dataframe object
+    nyse_ccl_df = pd.DataFrame.from_dict(resp_nyse['Time Series (Daily)']).T
+    le_ccl_df = pd.DataFrame.from_dict(resp_le['Time Series (Daily)']).T
 
-    # # Save to csv
-    # nyse_ccl_df.to_csv("./data/nyse_ccl_daily.csv")
-    # le_ccl_df.to_csv("./data/le_ccl_daily.csv")
+    # Save to csv
+    nyse_ccl_df.to_csv("./data/nyse_ccl_daily.csv")
+    le_ccl_df.to_csv("./data/le_ccl_daily.csv")
 
     # # US to UK Pound
     resp_us_to_gbp = api_data_extraction(apilayer_url, header_apilayer, "./data/us_gbp_2023_01-04.json",None)
+    
+    print("Success! Please review the data folder.")
+    print(resp_us_to_gbp)
+    print(nyse_ccl_df.head())
+    print(le_ccl_df.head())
+    
     
